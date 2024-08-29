@@ -1,0 +1,4 @@
+.active-route {
+  background-color: rgb(231 94 141 / var(--tw-bg-opacity));
+  color: white;
+}

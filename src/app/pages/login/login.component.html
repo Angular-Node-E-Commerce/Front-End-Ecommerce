@@ -1,0 +1,63 @@
+<div class="py-10 bg-blackback flex justify-center">
+  <div class="flex flex-wrap justify-between bg-neutral-800 w-10/12 mt-4 rounded-3xl">
+    <div class="flex justify-center w-full md:w-1/2 p-5 items-center">
+      <img src="https://www.bhmpics.com/downloads/controller-player-Wallpapers/3.17f57382aa0069105b7449355b7b2083.jpg" alt class="w-3/4 product-image rounded-l-3xl h-4/6">
+    </div>
+
+    <div class="container p-5 w-full md:w-1/2 flex flex-col justify-center text-foshia">
+      <div class="text-base-200">
+        <h1 class="text-[40px]">LET'S LOGIN</h1>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="handleSubmitForm()">
+        <!-- Email address Input -->
+        <div class="mb-3">
+          <label for="email" class="form-label">
+            <span class="label-text text-foshia">Email address</span>
+          </label>
+          <input type="email" class="form-control focus:outline-none text-base-200 w-full bg-neutral-800 ps-3 border-l-2 border-foshia border-r-2 border-r-foshia rounded-tl-lg rounded-br-lg h-12" id="email" name="email" formControlName="email">
+          @if(email?.touched && email?.invalid){
+          <div class="form-text text-foshia">
+            @if(email?.hasError('required')){
+            <small class="text-red-500">Required</small>
+            } @if(email?.hasError('email')){
+            <small class="text-red-500">Email Format does not match</small>
+            }
+          </div>
+          }
+        </div>
+
+        <!-- Password Input -->
+        <div class="mb-3">
+          <label for="password" class="block form-label">
+            <span class="label-text text-foshia">Password</span>
+          </label>
+          <input type="password" class="form-control focus:outline-none text-base-200 w-full bg-neutral-800 ps-3 border-l-2 border-foshia border-r-2 border-r-foshia rounded-tl-lg rounded-br-lg h-12" id="password" name="password" formControlName="password">
+          @if(password?.touched && password?.invalid){
+          <div class="form-text text-foshia">
+            @if(password?.hasError('required')){
+            <small class="text-red-500">Required</small>
+            } @if(password?.hasError('pattern')){
+            <small class="text-red-500">Password must contain at least one lowercase letter and be at least 8 characters long</small>
+            }
+          </div>
+          }
+        </div>
+
+        <!-- Login Error Message -->
+        @if(loginError){
+        <div class="mb-3 text-red-500">
+          {{ loginError }}
+        </div>
+        }
+
+        <div class="flex justify-center mb-1">
+          <button type="submit" class="btn bg-foshia text-neutral-50 w-1/4 hover:bg-neutral-50 border-none hover:text-foshia hover:transition-all">Login</button>
+        </div>
+
+        <div class="flex justify-center text-neutral-50">
+          <p>Don't have an account? <a   routerLink="/sign-up" class="text-decoration-none text-foshia">Sign Up</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

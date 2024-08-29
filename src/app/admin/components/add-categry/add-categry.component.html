@@ -1,0 +1,39 @@
+<div class="min-h-screen flex items-center justify-center bg-blackback p-5">
+  <div class="bg-neutral-800 p-8 mt-28 rounded-lg text-base-100 shadow-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center">Add New Category</h1>
+    <form (ngSubmit)="onSubmit()" class="space-y-6">
+      <div class="flex flex-col sm:flex-row gap-3">
+        <!-- Name Field -->
+        <div class="form-group w-full sm:w-4/4">
+          <label for="name" class="block text-sm font-medium mb-2">Name</label>
+          <input type="text"
+            class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+            id="name" [(ngModel)]="category.name" name="name" placeholder="Enter category name" required>
+        </div>
+
+        <!-- Description Field -->
+        <div class="form-group w-full sm:w-4/4">
+          <label for="desc" class="block text-sm font-medium mb-2">Description</label>
+          <input type="text"
+            class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+            id="desc" [(ngModel)]="category.description" name="desc" placeholder="Enter category description" required>
+        </div>
+
+        <!-- Image Field -->
+        <div class="form-group w-full sm:w-4/4">
+          <label for="image" class="block text-sm font-medium mb-2">Image</label>
+          <input type="file"
+            class="form-control bg-neutral-700 text-neutral-700 cursor-pointer w-full px-4 py-2 rounded-lg border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+            id="image" (change)="onFileChange($event)" name="image" required>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit"
+          class="btn border-none px-6 text-base-100 py-2 rounded-lg bg-foshia hover:bg-foshia transition duration-300">Add
+          Category</button>
+      </div>
+    </form>
+  </div>
+</div>

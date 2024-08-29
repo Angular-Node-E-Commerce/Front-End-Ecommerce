@@ -1,0 +1,58 @@
+<div class="w-full landing p-0 sm:p-8 ">
+  <div class="p-9">
+    <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-5 justify-between text-neutral-50 mt-8 bg-neutral-800 rounded-xl">
+      <div class="flex justify-center ">
+        <img [src]="gameDetails.imageCover" alt
+          class="w-4/6 product-image rounded-xl">
+      </div>
+
+      <div>
+        <div class="flex justify-between">
+          <div class="border-b border-gray-300 py-3">
+            <p class="text-3xl sm:text-5xl font-bold mb-5">{{gameDetails?.title}}</p>
+            <p class="font-bold text-2xl text-foshia mb-3">{{gameDetails?.price | currency }}</p>
+            <p class="text-neutral-300">{{gameDetails?.description}}</p>
+            <div [innerHTML]="gameDetails?.rating | rating"></div>
+          </div>
+          <div>
+            <p *ngIf="gameDetails?.stock === 0" class="badge rounded-pill bg-warning border-none text-neutral-50 p-5 flex">Out Of Stock</p>
+            <p *ngIf="gameDetails?.stock > 0" class="badge rounded-badge bg-success border-none text-neutral-50 p-6">In Stock</p>
+          </div>
+        </div>
+        
+        <div class="py-3 flex flex-col border-b border-gray-300 ">
+          <div>
+            <p class="more-quote">More Information</p>
+            <div class="flex gap-2">
+              <p class="tags-info" *ngFor="let tag of gameDetails?.tags; trackBy: trackByIndex">{{tag}}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="py-3 flex justify-between">
+          <div class="flex flex-col">
+            <div class="flex items-center">
+              <button (click)="decreaseQuantity()" class="btn btn-outline-secondary total-btn">-</button>
+              <span class="mx-2 text-2xl bg-foshia btn border-none hover:bg-foshia text-neutral-50">{{quantity}}</span>
+              <button (click)="increaseQuantity()" class="btn btn-outline-secondary total-btn">+</button>
+            </div>
+            <p class="mt-2 text-xl">Total: {{gameDetails?.price * quantity | currency}}</p>
+          </div>
+
+          <div *ngIf="gameDetails?.stock > 0">
+            <p class="font-bold">Only <span class="in-stock">{{gameDetails?.stock}} Item</span> left</p>
+          </div>
+          <div *ngIf="gameDetails?.stock === 0">
+            <p class="out-stock font-bold">Sorry, Out Of Stock!</p>
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <button class="btn px-5 py-2 rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none" (click)="addToCart()">
+            Add To Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,53 @@
+
+<button class="btn bg-foshia w-full mt-12"  routerLink="/add-category"> ADD</button>
+<div class="text-neutral-50 flex justify-center items-center p-5">
+  @if(categories.length > 0; ){
+  <div class="flex flex-col gap-3 w-full sm:w-3/5">
+    @for(category of categories ; track $index){
+    <div class="user-item flex gap-7 justify-between items-stretch border-b p-2 text-sm  sm:text-lg">
+      <div>
+        <img src={{category.image}} class="w-1/4" alt="">
+      </div>
+      <div>
+        <p>{{ category.description }}</p>
+      </div>
+      <div class="flex  gap-3 ">
+        <p>{{ category.name }}</p>
+        <button  (click)="editCategory(category._id)" class="btn px-6 bg-primary text-neutral-50 hover:bg-neutral-50 hover:text-error hover:transition-all border-none">Edit</button>
+      </div>
+
+    </div>
+    }
+  </div>
+
+  }@else{
+  <div class="no-users-message w-96  flex justify-center items-center ">
+    <div class="w-3/4">
+      <img
+        src="https://cdni.iconscout.com/illustration/premium/thumb/no-user-found-illustration-download-in-svg-png-gif-file-formats--search-not-error-web-page-filter-unavailable-404-empty-states-pack-business-illustrations-5639817.png?f=webp"
+        alt="No users found" />
+      <p class="text-neutral-50 text-center text-2xl">No users found.</p>
+    </div>
+  </div>
+  }
+
+
+</div>
+
+<!-- <div class="min-h-screen flex items-center justify-center bg-blackback p-5">
+  <div
+    class="bg-neutral-800 p-8 mt-28 rounded-lg text-base-100 shadow-lg w-full sm:w-8/12">
+    <h1 class="text-2xl font-bold mb-6 text-center">Categories</h1>
+    <div *ngIf="error">
+      <p>{{ error }}</p>
+    </div>
+    <div *ngIf="!error">
+      <div *ngFor="let category of categories"
+        class="category-item flex gap-7 justify-between items-stretch border-b p-2">
+        <p>{{ category.title }}</p>
+        <button (click)="editCategory(category._id)"
+          class="btn px-6 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">Edit</button>
+      </div>
+    </div>
+  </div>
+</div> -->
