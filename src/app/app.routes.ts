@@ -9,7 +9,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 import { EditCategoryComponent } from './admin/components/edit-category/edit-category.component';
-import {  AddCategryComponent } from './admin/components/add-categry/add-categry.component';
+import { AddCategryComponent } from './admin/components/add-categry/add-categry.component';
 import { CategoriesComponent } from './admin/pages/admin-categories/categories.component';
 import { AdminPageComponent } from './admin/pages/admin-page/admin-page.component';
 import { AdminUsersComponent } from './admin/pages/admin-users/admin-users.component';
@@ -18,38 +18,38 @@ import { ForgetPasswordComponent } from './pages/forget-password/forget-password
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { AuthGuard } from './guadrs/auth.guard';
 import { AdminGuard } from './guadrs/admin.guard';
-
+import { AdminGamesComponent } from './admin/pages/admin-games/admin-games.component';
 
 export const routes: Routes = [
   {
-    path:'',
+    path: '',
     component: HomeComponent,
-    title : 'home'
+    title: 'home',
   },
   {
-    path:'login',
+    path: 'login',
     component: LoginComponent,
-    title: 'Login'
+    title: 'Login',
   },
   {
-    path:'forget-password',
+    path: 'forget-password',
     component: ForgetPasswordComponent,
-    title: 'Forget Password'
+    title: 'Forget Password',
   },
   {
-    path:'reset-password',
+    path: 'reset-password',
     component: ResetPasswordComponent,
-    title: 'Reset Password'
+    title: 'Reset Password',
   },
   {
-    path:'sign-up',
+    path: 'sign-up',
     component: SignUpComponent,
-    title: 'Sign Up'
+    title: 'Sign Up',
   },
   {
-    path:'games-page',
+    path: 'games-page',
     component: GamesPageComponent,
-    title: 'Games Page'
+    title: 'Games Page',
   },
   {
     path: 'game-details/:id',
@@ -60,49 +60,52 @@ export const routes: Routes = [
     path: 'admin-categories',
     component: CategoriesComponent,
     title: 'Categories',
-  },{
+  },
+  {
     path: 'edit-category/:id',
     component: EditCategoryComponent,
     title: 'Edit Category',
   },
   {
-    path : 'cart',
-    component:  CartComponent,
-    title: 'Cart'
+    path: 'cart',
+    component: CartComponent,
+    title: 'Cart',
   },
   {
-    path:'user-profile',
+    path: 'user-profile',
     component: UserProfileComponent,
-    title:'Profile Page'
-
+    title: 'Profile Page',
   },
   {
-    path:'add-category',
+    path: 'add-category',
     component: AddCategryComponent,
-    title:'Add Category'
+    title: 'Add Category',
   },
   {
-    path:'admin-page',
+    path: 'admin-page',
     component: AdminPageComponent,
     // title:'Admin Page', canActivate: [AuthGuard]
-    title:'Admin Page',
-    canActivate: [AuthGuard, AdminGuard]
+    title: 'Admin Page',
+    canActivate: [AuthGuard, AdminGuard],
   },
   {
-    path:'admin-users',
+    path: 'admin-users',
     component: AdminUsersComponent,
-    title:'Admin Users'
-
+    title: 'Admin Users',
   },
   {
-    path:'admin-orders',
+    path: 'admin-orders',
     component: AdminOrdersComponent,
-    title:'Admin Orders'
+    title: 'Admin Orders',
   },
   {
-    path:'**',
+    path: 'admin-games',
+    component: AdminGamesComponent,
+    title: 'Admin Games',
+  },
+  {
+    path: '**',
     component: ErrorComponent,
-    title: 'Error'
-  }
-
+    title: 'Error',
+  },
 ];
