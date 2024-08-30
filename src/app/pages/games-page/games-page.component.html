@@ -24,8 +24,9 @@
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <app-game-card *ngFor="let game of filterGames" [gameItem]="game"
-          (handleSendData)="handleReceiveData($event)"></app-game-card>
+        <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
+        [gameItem]="game"
+        (handleSendData)="handleReceiveData($event)"></app-game-card>
         <div *ngIf="!filterGames.length">
           <img src="https://i.pinimg.com/564x/72/27/b7/7227b71022c00213aebc5a995efeb0a9.jpg" alt="No games found" />
         </div>

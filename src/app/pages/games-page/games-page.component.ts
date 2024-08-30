@@ -21,7 +21,7 @@ import { ActivatedRoute } from '@angular/router';
     ArrowRightComponent,
   ],
   templateUrl: './games-page.component.html',
-  styleUrls: ['./games-page.component.css'],  // `styleUrls` should be in plural form
+  styleUrls: ['./games-page.component.css'], 
 })
 export class GamesPageComponent implements OnInit {
   games: any[] = [];
@@ -31,6 +31,8 @@ export class GamesPageComponent implements OnInit {
   selectedCategory: string = 'all';
   GamesPerPage = 8;
   currentPage = 1;
+  filteredGamesForCurrentPage: any[] = [];
+
 
   constructor(private gamesRequestService: GamesRequestService, private categoriesService: CategoriesService, private route: ActivatedRoute) { }
   ngOnInit(): void {
@@ -40,18 +42,20 @@ export class GamesPageComponent implements OnInit {
     });
   
     this.categoriesService.getCategories().subscribe((res: any) => {
-      console.log('Categories API Response:', res); // طبع كل الرد من الـ API
+      console.log('Categories API Response:', res); 
       this.categories = res.data.categories;
     });
   }
   
-  handleData(data: any) {
-    console.log('Raw data:', data);
-    if (data && data.data && Array.isArray(data.data.games)) {
-      this.games = data.data.games;
+  handleData(res: any) {
+    console.log('Raw data:', res);
+    if (res && res.data && Array.isArray(res.data.games)) {
+      this.games = res.data.games;
     } else {
       console.error('Invalid data format received from API');
       this.games = [];
+      this.filterGames = [];
+      this.filteredGamesForCurrentPage = [];
     }
     console.log('Processed games array:', this.games);
     this.filterGames = [...this.games];
@@ -67,7 +71,7 @@ export class GamesPageComponent implements OnInit {
   handleSearch() {
     this.filterGamesByCategory();
     this.filterGames = this.filterGames.filter((game) => {
-      return game.title && typeof game.title === 'string' && game.title.toLowerCase().includes(this.searchtext.toLowerCase());
+      return game.title.toLowerCase().includes(this.searchtext.toLowerCase());
     })
        this.updatePaginatedGames();
   }
@@ -86,24 +90,33 @@ export class GamesPageComponent implements OnInit {
     this.selectedCategory = id;
     console.log(this.selectedCategory);
     this.filterGamesByCategory()
-    // this.handleSearch();
+    this.handleSearch();
   }
   
-  
-
   updatePaginatedGames() {
+    if (this.filterGames.length === 0) {
+      console.error('No data found after filtering.');
+      this.filteredGamesForCurrentPage = [];
+      return;
+    }
+    
     const startIndex = (this.currentPage - 1) * this.GamesPerPage;
     const endIndex = startIndex + this.GamesPerPage;
-
-    // Slice the filtered games for pagination
-    this.filterGames = this.filterGames.slice(startIndex, endIndex);
-
-    // Handle case where the current page is out of range due to filtering
-    if (this.filterGames.length === 0 && this.currentPage > 1) {
+  
+    if (startIndex > this.filterGames.length) {
+      this.currentPage = 1; 
+      this.updatePaginatedGames();
+      return;
+    }
+  
+    this.filteredGamesForCurrentPage = this.filterGames.slice(startIndex, endIndex);
+  
+    if (this.currentPage > 1 && this.filteredGamesForCurrentPage.length === 0) {
       this.currentPage--;
       this.updatePaginatedGames();
     }
   }
+  
 
   nextPage() {
     if (this.currentPage * this.GamesPerPage < this.games.length) {
