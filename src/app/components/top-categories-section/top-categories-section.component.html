@@ -1,11 +1,27 @@
-<div class="w-11/12 mx-auto mt-14">
+<div class="w-11/12 mx-auto">
   <div class="bg-neutral-800 p-5 rounded-xl">
     <div class="flex justify-between items-center mb-6">
       <h2 class="text-2xl font-bold text-neutral-50">Top Categories</h2>
-      <button
+      <a routerLink="/games-page"
         class="px-5 py-2 btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">View
-        All</button>
+        All</a>
     </div>
-    <app-top-categories-card />
+    <div *ngIf="categories.length > 0; else noGames"
+      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <app-top-categories-card *ngFor="let category of categories | slice:0:4; trackBy: trackByIndex"
+        [categoryItem]="category" />
+    </div>
+
+    <ng-template #noGames>
+      <div class="no-users-message w-96 flex justify-center items-center">
+        <div class="w-3/4">
+          <img
+            src="https://cdni.iconscout.com/illustration/premium/thumb/no-user-found-illustration-download-in-svg-png-gif-file-formats--search-not-error-web-page-filter-unavailable-404-empty-states-pack-business-illustrations-5639817.png?f=webp"
+            alt="No users found" />
+          <p class="text-neutral-50 text-center text-2xl">No users found.</p>
+        </div>
+      </div>
+    </ng-template>
+
   </div>
 </div>
