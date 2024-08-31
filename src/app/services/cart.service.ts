@@ -10,6 +10,8 @@ export class CartService {
 
   addToCart(product: any, quantity: number = 1) {
     const currentItems = this.cartItems.value;
+
+
     const itemIndex = currentItems.findIndex(item => item.id === product.id);
     if (itemIndex > -1) {
       currentItems[itemIndex].quantity += quantity;
