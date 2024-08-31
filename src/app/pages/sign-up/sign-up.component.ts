@@ -62,17 +62,17 @@ export class SignUpComponent {
 
     if (this.registerForm.valid) {
       console.log('Form is valid');
-      const profileObj= {
-        firstname:this.registerForm.value.firstname,
-        lastName:this.registerForm.value.lastname,
-        address:{
-          country:this.registerForm.value.country,
-          city:this.registerForm.value.city,
-          street:this.registerForm.value.street
-        }
-      }
+      // const profileObj= {
+      //   firstname:this.registerForm.value.firstname,
+      //   lastName:this.registerForm.value.lastname,
+      //   address:{
+      //     country:this.registerForm.value.country,
+      //     city:this.registerForm.value.city,
+      //     street:this.registerForm.value.street
+      //   }
+      // }
 
-      const ProfileJson = JSON.stringify(profileObj);
+      // const ProfileJson = JSON.stringify(profileObj);
 
       const formData = new FormData();
       formData.append('username', this.registerForm.value.username);
