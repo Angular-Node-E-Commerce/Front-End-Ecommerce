@@ -30,6 +30,20 @@ export class AuthService {
   removeRole(): void {
     localStorage.removeItem('userRole');
   }
+  
+  getCurrentUser(): any {
+    const user = localStorage.getItem('currentUser');
+    return user ? JSON.parse(user) : null;
+  }
+
+  setCurrentUser(user: any): void {
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  removeUser(): void {
+    localStorage.removeItem('currentUser');
+  }
+
 
   private base64UrlDecode(str: string): string {
     let output = str.replace(/-/g, '+').replace(/_/g, '/');
@@ -67,4 +81,9 @@ export class AuthService {
     const token = this.getToken();
     return token ? !this.isTokenExpired(token) : false;
   }
+
+  private tokenKey = 'authToken';
+
+
+
 }
