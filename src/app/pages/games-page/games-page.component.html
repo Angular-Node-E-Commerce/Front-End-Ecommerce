@@ -2,58 +2,33 @@
   <div class="flex-none gap-2">
     <div class="flex justify-end">
       <div class="form-control w-full sm:w-1/2 py-10">
-        <input
-          type="text"
-          placeholder="Search"
-          (input)="onSearchInput($event)"
-          class="input rounded-2xl input-bordered bg-neutral-800 text-base-200 h-14 md:w-auto"  />
+        <input type="text" placeholder="Search" (input)="onSearchInput($event)"
+          class="input rounded-2xl input-bordered bg-neutral-800 text-base-200 h-14 md:w-auto" />
       </div>
     </div>
-
     <div class="bg-neutral-800 p-8 rounded-xl">
-      <div
-        class="flex justify-center gap-4 items-center mb-6 overflow-x-scroll">
-        <button
-          (click)="onCategorySelected('all')"
-          [ngClass]="{'active': selectedCategory === 'all'}"
+      <div class="flex justify-center gap-4 items-center mb-6 overflow-x-scroll">
+        <button (click)="onCategorySelected('all')" [ngClass]="{'active': selectedCategory === 'all'}"
           class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
           All
         </button>
-        <button
-          (click)="onCategorySelected('Adventure')"
-          [ngClass]="{'active': selectedCategory === 'Adventure'}"
-          class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          Adventure
-        </button>
-        <button
-          (click)="onCategorySelected('Sports')"
-          [ngClass]="{'active': selectedCategory === 'Sports'}"
-          class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          Sports
-        </button>
-        <button
-          (click)="onCategorySelected('Action')"
-          [ngClass]="{'active': selectedCategory === 'Action'}"
-          class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          Action
-        </button>
-        <button
-          (click)="onCategorySelected('Horror')"
-          [ngClass]="{'active': selectedCategory === 'Horror'}"
-          class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          Horror
-        </button>
+
+        <ng-container>
+          <button *ngFor="let category of categories" (click)="onCategorySelected(category._id)"
+            [ngClass]="{'active': selectedCategory === category._id}"
+            class="btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
+            {{ category.name }}
+          </button>
+        </ng-container>
+
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <app-game-card
-          *ngFor="let game of filterGames"
-          [gameItem]="game"
-          (handleSendData)="handleReceiveData($event)"></app-game-card>
+        <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
+        [gameItem]="game"
+        (handleSendData)="handleReceiveData($event)"></app-game-card>
         <div *ngIf="!filterGames.length">
-          <img
-            src="https://i.pinimg.com/564x/72/27/b7/7227b71022c00213aebc5a995efeb0a9.jpg"
-            alt="No games found" />
+          <img src="https://i.pinimg.com/564x/72/27/b7/7227b71022c00213aebc5a995efeb0a9.jpg" alt="No games found" />
         </div>
       </div>
 
@@ -63,8 +38,7 @@
           <app-arrow-left />
         </button>
         <p class="text-neutral-50 flex items-center">{{ currentPage }}</p>
-        <button
-          (click)="nextPage()"
+        <button (click)="nextPage()"
           class="btn rounded-3xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
           <app-arrow-right />
         </button>

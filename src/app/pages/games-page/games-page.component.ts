@@ -5,6 +5,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ArrowLeftComponent } from '../../icons/arrow-left/arrow-left.component';
 import { ArrowRightComponent } from '../../icons/arrow-right/arrow-right.component';
 import { GamesRequestService } from '../../services/games-request.service';
+import { CategoriesService } from '../../services/categories-request.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-games-page',
@@ -19,33 +21,43 @@ import { GamesRequestService } from '../../services/games-request.service';
     ArrowRightComponent,
   ],
   templateUrl: './games-page.component.html',
-  styleUrls: ['./games-page.component.css'],  // `styleUrls` should be in plural form
+  styleUrls: ['./games-page.component.css'], 
 })
 export class GamesPageComponent implements OnInit {
   games: any[] = [];
   filterGames: any[] = [];
+  categories: any[] = [];
   searchtext: string = '';
   selectedCategory: string = 'all';
   GamesPerPage = 8;
   currentPage = 1;
+  filteredGamesForCurrentPage: any[] = [];
 
-  constructor(private gamesRequestService: GamesRequestService) { }
 
+  constructor(private gamesRequestService: GamesRequestService, private categoriesService: CategoriesService, private route: ActivatedRoute) { }
   ngOnInit(): void {
     this.gamesRequestService.getGamesList().subscribe((res: any) => {
       console.log('Data received from service:', res);
       this.handleData(res);
     });
+  
+    this.categoriesService.getCategories().subscribe((res: any) => {
+      console.log('Categories API Response:', res); 
+      this.categories = res.data.categories;
+    });
   }
-
-  handleData(data: any) {
-    // Check if the data is an object containing the games array
-    if (data && data.data && Array.isArray(data.data.games)) {
-      this.games = data.data.games;
+  
+  handleData(res: any) {
+    console.log('Raw data:', res);
+    if (res && res.data && Array.isArray(res.data.games)) {
+      this.games = res.data.games;
     } else {
       console.error('Invalid data format received from API');
       this.games = [];
+      this.filterGames = [];
+      this.filteredGamesForCurrentPage = [];
     }
+    console.log('Processed games array:', this.games);
     this.filterGames = [...this.games];
     this.updatePaginatedGames();
   }
@@ -57,43 +69,54 @@ export class GamesPageComponent implements OnInit {
   }
 
   handleSearch() {
-    this.filterGamesByCategory(); // Apply category filter first
-    this.filterGames = this.filterGames.filter((game) =>
-      game.title.toLowerCase().includes(this.searchtext.toLowerCase())
-    );
-    this.updatePaginatedGames();
+    this.filterGamesByCategory();
+    this.filterGames = this.filterGames.filter((game) => {
+      return game.title.toLowerCase().includes(this.searchtext.toLowerCase());
+    })
+       this.updatePaginatedGames();
   }
 
   filterGamesByCategory() {
     if (this.selectedCategory === 'all') {
       this.filterGames = [...this.games];
     } else {
-      this.filterGames = this.games.filter(
-        (game) => game.genre.toLowerCase() === this.selectedCategory.toLowerCase()
-      );
+      this.filterGames = this.games.filter(game => game.category === this.selectedCategory);
     }
     this.currentPage = 1; // Reset to the first page
     this.updatePaginatedGames();
   }
-
-  onCategorySelected(genre: string) {
-    this.selectedCategory = genre;
+  
+  onCategorySelected(id: string) {
+    this.selectedCategory = id;
+    console.log(this.selectedCategory);
+    this.filterGamesByCategory()
     this.handleSearch();
   }
-
+  
   updatePaginatedGames() {
+    if (this.filterGames.length === 0) {
+      console.error('No data found after filtering.');
+      this.filteredGamesForCurrentPage = [];
+      return;
+    }
+    
     const startIndex = (this.currentPage - 1) * this.GamesPerPage;
     const endIndex = startIndex + this.GamesPerPage;
-
-    // Slice the filtered games for pagination
-    this.filterGames = this.filterGames.slice(startIndex, endIndex);
-
-    // Handle case where the current page is out of range due to filtering
-    if (this.filterGames.length === 0 && this.currentPage > 1) {
+  
+    if (startIndex > this.filterGames.length) {
+      this.currentPage = 1; 
+      this.updatePaginatedGames();
+      return;
+    }
+  
+    this.filteredGamesForCurrentPage = this.filterGames.slice(startIndex, endIndex);
+  
+    if (this.currentPage > 1 && this.filteredGamesForCurrentPage.length === 0) {
       this.currentPage--;
       this.updatePaginatedGames();
     }
   }
+  
 
   nextPage() {
     if (this.currentPage * this.GamesPerPage < this.games.length) {

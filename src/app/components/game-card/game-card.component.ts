@@ -24,9 +24,6 @@ export class GameCardComponent implements OnInit {
   counter = 0;
 
   ngOnInit() {
-    if (!this.gameItem || !this.gameItem.id) {
-      console.error('Game Item or Game ID is undefined');
-    }
     this.counterService.getCounter().subscribe((res) => (this.counter = res));
   }
 

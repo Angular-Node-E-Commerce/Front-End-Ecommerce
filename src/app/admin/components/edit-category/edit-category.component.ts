@@ -11,11 +11,11 @@ import { CategoriesService } from '../../../services/categories-request.service'
   templateUrl: './edit-category.component.html',
   styleUrl: './edit-category.component.css'
 })
-export class EditCategoryComponent implements OnInit {
-  category: any = {
+export class EditCategoryComponent {
+  category = {
     name: '',
     description: '',
-    image: null
+    image: null as File | null
   };
   private categoryId!: string; // Use definite assignment assertion
 
@@ -30,6 +30,7 @@ export class EditCategoryComponent implements OnInit {
     this.categoriesService.getCategoryDetails(this.categoryId).subscribe({
       next: (data: any) => {
         this.category = data;
+        console.log(this.category);
       },
       error: (error) => {
         console.error('Error fetching category details', error);
@@ -46,16 +47,22 @@ export class EditCategoryComponent implements OnInit {
 
   onSubmit() {
     const formData = new FormData();
-    formData.append('name', this.category.name);
-    formData.append('description', this.category.description);
-    if (this.category.image instanceof File) {
-      formData.append('image', this.category.image);
-    }
+    formData.set('name', this.category.name);
+    formData.set('description', this.category.description);
+    
+    if (this.category.image) {
+      formData.set('image', this.category.image);
+    }    
 
+    formData.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
+
+    console.log(formData);
     this.categoriesService.updateCategory(this.categoryId, formData).subscribe({
       next: (res: any) => {
+        this.router.navigate(['/admin-categories', res]);
         console.log('Category updated successfully', res);
-        this.router.navigate(['/admin-categories']);
       },
       error: (error) => {
         console.error('Error updating category', error);
