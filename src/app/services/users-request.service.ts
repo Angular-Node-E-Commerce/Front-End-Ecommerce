@@ -15,12 +15,12 @@ export class UsersRequestService {
   //   const body = { email, password };
   //   console.log('Login request body:', body);
 
-  //   return this.http.post(`${this.apiUrl}/login/`, body); 
+  //   return this.http.post(`${this.apiUrl}/login/`, body);
   // }
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
     console.log('Login request body:', body);
-  
+
     return this.http.post(`${this.apiUrl}/login/`, body).pipe(
       tap((response: any) => {
         const user = response.user;
@@ -28,7 +28,7 @@ export class UsersRequestService {
       })
     );
   }
-  
+
 
   signUp(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/signup/`, user);
