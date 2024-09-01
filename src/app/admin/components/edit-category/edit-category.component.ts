@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoriesService } from '../../../services/categories-request.service';
 
 @Component({
   selector: 'app-edit-category',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './edit-category.component.html',
   styleUrl: './edit-category.component.css'
 })
@@ -18,12 +18,24 @@ export class EditCategoryComponent {
     image: null as File | null
   };
   private categoryId!: string; // Use definite assignment assertion
+  registerForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoriesService: CategoriesService
-  ) { }
+    private categoriesService: CategoriesService,
+    private fb: FormBuilder,
+  ) { 
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(30)]],
+      image: [null, Validators.required]
+    })
+  }
+
+  get name() {return this.registerForm.get('name')};
+  get description() { return this.registerForm.get('description')}
+  get image() {return this.registerForm.get('image')}
 
   ngOnInit() {
     this.categoryId = this.route.snapshot.paramMap.get('id') ?? ''; // Provide a default value
