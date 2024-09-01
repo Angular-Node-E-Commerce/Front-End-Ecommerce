@@ -1,10 +1,19 @@
+<div class="flex justify-end pt-4">
+  <button class="btn bg-foshia border-none text-neutral-50 mt-12 w-96 align-middle me-5"  routerLink="/add-category"> ADD</button>
+</div>
 
-<button class="btn bg-foshia border-none w-full mt-12"  routerLink="/add-category"> ADD</button>
-<div class="text-neutral-50 flex justify-center items-center p-5">
+<!-- <div class="text-neutral-50 flex justify-center items-center p-5"> -->
+
+
+  <!-- <div class="w-75"> -->
+    <div class="user-item flex justify-between text-neutral-50 ml-3 bg-neutral-800 w-100 m-12  border-l-4 rounded-xl ">
+
+
+
   @if(categories.length > 0; ){
   <div class="flex flex-col gap-3 w-full sm:w-3/5">
     @for(category of categories ; track $index){
-    <div class="user-item flex gap-7 justify-between items-stretch border-b p-2 text-sm  sm:text-lg">
+    <div class="user-item flex gap-7 justify-between items-stretch mb-5 p-2 text-sm  sm:text-lg">
       <div>
         <img src={{category.image}} class="w-1/4" alt="">
       </div>
@@ -13,27 +22,28 @@
       </div>
       <div class="flex  gap-3 ">
         <p>{{ category.name }}</p>
-        <button  (click)="editCategory(category._id)" class="btn px-6 bg-primary text-neutral-50 hover:bg-neutral-50 hover:text-error hover:transition-all border-none">Edit</button>
+        <button  (click)="editCategory(category._id)" class="btn px-6 text-neutral-50 hover:bg-neutral-50 hover:text-error bg-foshia hover:transition-all border-none">Edit</button>
       </div>
 
     </div>
     }
   </div>
 
-  }@else{
+}@else{
   <div class="no-users-message w-96  flex justify-center items-center ">
     <div class="w-3/4">
       <img
-        src="https://cdni.iconscout.com/illustration/premium/thumb/no-user-found-illustration-download-in-svg-png-gif-file-formats--search-not-error-web-page-filter-unavailable-404-empty-states-pack-business-illustrations-5639817.png?f=webp"
-        alt="No users found" />
+      src="https://cdni.iconscout.com/illustration/premium/thumb/no-user-found-illustration-download-in-svg-png-gif-file-formats--search-not-error-web-page-filter-unavailable-404-empty-states-pack-business-illustrations-5639817.png?f=webp"
+      alt="No users found" />
       <p class="text-neutral-50 text-center text-2xl">No users found.</p>
     </div>
   </div>
-  }
+}
 
 
 </div>
 
+<div>hi</div>
 <!-- <div class="min-h-screen flex items-center justify-center bg-blackback p-5">
   <div
     class="bg-neutral-800 p-8 mt-28 rounded-lg text-base-100 shadow-lg w-full sm:w-8/12">
