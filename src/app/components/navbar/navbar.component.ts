@@ -18,6 +18,7 @@ export class NavbarComponent {
   constructor(private cartService: CartService, private authService: AuthService) {}
 
   ngOnInit() {
+    this.userDetails = this.authService.getCurrentUser();
     this.cartService.cartItems$.subscribe((items) => {
       this.cartItems = items;
       this.totalItems = items.reduce((total, item) => total + item.quantity, 0);
@@ -25,8 +26,9 @@ export class NavbarComponent {
       this.userDetails = this.authService.getCurrentUser();
       console.log('User details:', this.userDetails);
     });
+
   }
-  
+
 
   getTotalPrice(): number {
     return this.cartItems.reduce((total, item) => {

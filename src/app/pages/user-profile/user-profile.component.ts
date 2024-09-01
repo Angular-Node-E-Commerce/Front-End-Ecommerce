@@ -16,7 +16,5 @@ export class UserProfileComponent {
 
 
   ngOnInit() {
-    this.userDetails = this.authService.getCurrentUser();
-    console.log('User details:', this.userDetails);
-}}
+    this.userDetails = this.authService.getCurrentUser();}}
 
