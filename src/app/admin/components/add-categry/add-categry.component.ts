@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CategoriesService } from '../../../services/categories-request.service';
 
 @Component({
   selector: 'app-add-categry',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-categry.component.html',
   styleUrl: './add-categry.component.css',
 })
@@ -17,11 +17,20 @@ export class AddCategryComponent {
     description: '',
     image: null as File | null,
   };
+  registerForm: FormGroup;
 
-  constructor(
-    private router: Router,
-    private categoriesService: CategoriesService
-  ) {}
+  constructor(private router: Router, private categoriesService: CategoriesService, private fb: FormBuilder) {
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', [Validators.required, Validators.minLength(30)]],
+      image: [null, Validators.required]
+    })
+   }
+  
+  get name(){ return this.registerForm.get('name');}
+  get description(){ return this.registerForm.get('description')}
+  get image() { return this.registerForm.get('image'); }
+
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -37,6 +46,7 @@ export class AddCategryComponent {
       formData.append('image', this.category.image);
     }
 
+    
 
     formData.forEach((value, key) => {
       console.log(key + ': ' + value);
@@ -52,7 +62,7 @@ export class AddCategryComponent {
       },
       error: (error) => {
         console.error('Error adding category', error);
-      },
+      }
     });
   }
 }

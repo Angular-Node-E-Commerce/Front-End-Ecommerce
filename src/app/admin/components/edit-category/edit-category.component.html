@@ -1,32 +1,46 @@
 <div class="min-h-screen flex items-center justify-center bg-blackback p-5">
   <div class="bg-neutral-800 p-8 mt-28 rounded-lg text-base-100 shadow-lg w-full sm:w-8/12">
     <h1 class="text-2xl font-bold mb-6 text-center">Edit Category</h1>
-    <form (ngSubmit)="onSubmit()" class="space-y-6">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="space-y-6">
       <div class="flex flex-col sm:flex-row gap-3">
         
         <div class="form-group w-full sm:w-2/4">
           <label for="name" class="block text-sm font-medium mb-2">Name</label>
-          <input type="text"
+          <input type="text" formControlName="name"
             class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            id="name" [(ngModel)]="category.name" name="name" placeholder="Enter category name" required>
+            id="name"  name="name" placeholder="Enter category name" required>
+            @if(name?.touched && name?.invalid) {
+              <small class="text-foshia">Required!</small>
+              }
         </div>
 
         <div class="form-group w-full sm:w-2/4">
           <label for="description" class="block text-sm font-medium mb-2">Description</label>
-          <input type="text"
+          <input type="text" formControlName="description"
             class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            id="description" [(ngModel)]="category.description" name="description" placeholder="Enter category description" required>
+            id="description"  name="description" placeholder="Enter category description" required>
+            @if(description?.touched && description?.invalid){
+              <div class="form-text text-foshia">
+                @if(description?.hasError('required')){
+                  <small class="text-foshia">Required!</small>
+                } @if(description?.hasError('minlength')){
+                  <small class="text-foshia">length 30 only!</small>
+                }
+              </div>
+            }
         </div>
       </div>
 
       <div class="form-group w-full">
         <label for="image" class="block text-sm font-medium mb-2">Image</label>
-        <input type="file"
-          class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+        <input type="file" formControlName="image"
+          class="block w-full text-lg text-gray-900  border-none rounded-lg cursor-pointer bg-transparent dark:text-gray-400  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-foshia"
           id="image" (change)="onFileChange($event)" name="image">
-        <img [src]="category.image" alt="Category Image" class="img-thumbnail mt-4 rounded-lg border border-neutral-600" >
+          @if(image?.touched && image?.invalid){
+            <small class="text-foshia">Required!</small>
+          }
+        <!-- <img [src]="category.image" alt="Category Image" class="img-thumbnail mt-4 rounded-lg border border-neutral-600" > -->
       </div>
-
      
       <div class="text-center">
         <button type="submit"

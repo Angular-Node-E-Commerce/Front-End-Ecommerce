@@ -1,23 +1,24 @@
 
-<button class="btn bg-foshia border-none w-full mt-12"  routerLink="/add-category"> ADD</button>
-<div class="text-neutral-50 flex justify-center items-center p-5">
+<p class="text-neutral-50 py-5 text-2xl tracking-wide underline underline-offset-8 font-bold flex justify-center">Categories</p>
+<div class="text-neutral-50 flex justify-center items-center p-5"> 
   @if(categories.length > 0; ){
-  <div class="flex flex-col gap-3 w-full sm:w-3/5">
-    @for(category of categories ; track $index){
-    <div class="user-item flex gap-7 justify-between items-stretch border-b p-2 text-sm  sm:text-lg">
-      <div>
-        <img src={{category.image}} class="w-1/4" alt="">
-      </div>
-      <div>
-        <p>{{ category.description }}</p>
-      </div>
-      <div class="flex  gap-3 ">
-        <p>{{ category.name }}</p>
-        <button  (click)="editCategory(category._id)" class="btn px-6 bg-primary text-neutral-50 hover:bg-neutral-50 hover:text-error hover:transition-all border-none">Edit</button>
-      </div>
-
-    </div>
-    }
+    <div class="flex flex-col gap-3 w-full sm:w-3/5">
+      @for(category of categories ; track $index){
+        <div class="user-item flex gap-7 justify-between items-stretch border-b p-2 text-sm  sm:text-lg">
+          <div>
+            <img src={{category.image}} class="w-1/4" alt="">
+          </div>
+          <div>
+            <p>{{ category.description }}</p>
+          </div>
+          <div class="flex  gap-3 ">
+            <p>{{ category.name }}</p>
+            <button  (click)="editCategory(category._id)" class="btn px-6 bg-primary text-neutral-50 hover:bg-neutral-50 hover:text-error hover:transition-all border-none">Edit</button>
+          </div>
+          
+        </div>
+      }
+      <button class="btn bg-foshia border-none w-28 m-auto mt-12"  routerLink="/add-category"> ADD</button>
   </div>
 
   }@else{
