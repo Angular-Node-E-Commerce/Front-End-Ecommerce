@@ -23,7 +23,7 @@
               <div class="form-text text-foshia">
                 @if(description?.hasError('required')){
                   <small class="text-foshia">Required!</small>
-                } @if(description?.hasError('minlength')){
+                } @if(description?.hasError('maxlength')){
                   <small class="text-foshia">length 30 only!</small>
                 }
               </div>
