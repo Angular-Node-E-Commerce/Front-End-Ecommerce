@@ -36,7 +36,7 @@
   <div class="flex justify-end pt-4">
     <button
       class="px-14 rounded-xl mt-4 btn bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none"
-      routerLink="/add-game-list" routerLinkActive="active-route">
+      routerLink="/add-admin-game" routerLinkActive="active-route">
       ADD GAME LIST
     </button>
   </div>
@@ -47,13 +47,20 @@
       <div class="user-item flex justify-between border-l-4 rounded-xl p-5 m-5"
         *ngFor="let game of games; let i = index">
         <p class="ml-5">{{ game.title }}</p>
+        <div>
+          <img [src]="game.imageCover" class="w-1/4" alt="">
+        </div>
         <div class="mr-5">
-          <button
+          <!-- <button
             class="btn px-6 mr-3 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none"
-            routerLink="/edit-admin/{{ game.id }}" routerLinkActive="active-route">
+            [routerLink]="['/edit-add-admin', game._id]" routerLinkActive="active-route">
             Edit
-          </button>
-          <button
+          </button> -->
+
+          <button (click)="editGame(game._id)"
+            class="btn px-6 bg-primary text-neutral-50 hover:bg-neutral-50 hover:text-error hover:transition-all border-none">Edit</button>
+
+          <button (click)="deleteGame(game._id)"
             class="btn px-6 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">
             Delete
           </button>
