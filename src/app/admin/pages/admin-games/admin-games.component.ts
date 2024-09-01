@@ -3,6 +3,7 @@ import { AdminAddGameListComponent } from '../admin-add-game-list/admin-add-game
 import { RouterLink } from '@angular/router';
 import { GamesRequestService } from '../../../services/games-request.service';
 import { NgFor } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-admin-games',
@@ -14,14 +15,20 @@ import { NgFor } from '@angular/common';
 export class AdminGamesComponent {
   games: any[] = [];
   filterGames: any[] = [];
+  error: string | null = null;
 
-  constructor(private gameRequestServer: GamesRequestService) {}
+  constructor(
+    private gameRequestServer: GamesRequestService,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.gameRequestServer.getGamesList().subscribe((res: any) => {
       console.log('Data received from service:', res);
       this.handleData(res);
     });
   }
+
   handleData(data: any) {
     if (Array.isArray(data)) {
       this.games = data;
@@ -35,10 +42,30 @@ export class AdminGamesComponent {
 
     this.filterGames = [...this.games];
   }
-  // handleData(data: any) {
-  //   // افتراض أن البيانات هي مصفوفة مباشرةً
-  //   this.game = Array.isArray(data) ? data : (data.games || []);
 
-  //   this.filterGames = [...this.game];
-  // }
+  editGame(gameId: string) {
+    this.router.navigate(['/edit-add-admin', gameId]);
+  }
+
+  deleteGame(gameId: string) {
+    if (!gameId) {
+      console.error('Game ID is undefined');
+      return;
+    }
+
+    this.gameRequestServer.deletegame(gameId).subscribe({
+      next: () => {
+        console.log('Game deleted successfully');
+        // Remove the deleted game from the local games array
+        this.games = this.games.filter((game) => game._id !== gameId);
+      },
+      error: (error) => {
+        console.error('Error deleting game:', error);
+        this.error =
+          typeof error === 'string'
+            ? error
+            : error.message || 'An error occurred while deleting the game.';
+      },
+    });
+  }
 }

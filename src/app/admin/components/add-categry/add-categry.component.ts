@@ -9,13 +9,13 @@ import { CategoriesService } from '../../../services/categories-request.service'
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-categry.component.html',
-  styleUrl: './add-categry.component.css'
+  styleUrl: './add-categry.component.css',
 })
 export class AddCategryComponent {
   category = {
     name: '',
     description: '',
-    image: null as File | null
+    image: null as File | null,
   };
   registerForm: FormGroup;
 
@@ -44,7 +44,9 @@ export class AddCategryComponent {
     formData.append('description', this.category.description);
     if (this.category.image) {
       formData.append('image', this.category.image);
-    }  
+    }
+
+    
 
     formData.forEach((value, key) => {
       console.log(key + ': ' + value);

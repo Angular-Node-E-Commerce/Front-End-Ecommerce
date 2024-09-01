@@ -9,13 +9,13 @@ import { CategoriesService } from '../../../services/categories-request.service'
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './edit-category.component.html',
-  styleUrl: './edit-category.component.css'
+  styleUrl: './edit-category.component.css',
 })
 export class EditCategoryComponent {
   category = {
     name: '',
     description: '',
-    image: null as File | null
+    image: null as File | null,
   };
   private categoryId!: string; // Use definite assignment assertion
   registerForm: FormGroup;
@@ -23,19 +23,8 @@ export class EditCategoryComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoriesService: CategoriesService,
-    private fb: FormBuilder,
-  ) { 
-    this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(30)]],
-      image: [null, Validators.required]
-    })
-  }
-
-  get name() {return this.registerForm.get('name')};
-  get description() { return this.registerForm.get('description')}
-  get image() {return this.registerForm.get('image')}
+    private categoriesService: CategoriesService
+  ) { }
 
   ngOnInit() {
     this.categoryId = this.route.snapshot.paramMap.get('id') ?? ''; // Provide a default value
@@ -46,7 +35,7 @@ export class EditCategoryComponent {
       },
       error: (error) => {
         console.error('Error fetching category details', error);
-      }
+      },
     });
   }
 
@@ -61,10 +50,10 @@ export class EditCategoryComponent {
     const formData = new FormData();
     formData.set('name', this.category.name);
     formData.set('description', this.category.description);
-    
+
     if (this.category.image) {
       formData.set('image', this.category.image);
-    }    
+    }
 
     formData.forEach((value, key) => {
       console.log(key + ': ' + value);
@@ -78,7 +67,7 @@ export class EditCategoryComponent {
       },
       error: (error) => {
         console.error('Error updating category', error);
-      }
+      },
     });
   }
 }

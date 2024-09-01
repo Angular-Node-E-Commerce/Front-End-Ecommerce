@@ -31,8 +31,8 @@ export class GameCardComponent implements OnInit {
     this.counterService.setCounter(this.counter + 1);
   }
 
-  addToCart() {
-    this.cartService.addToCart(this.gameItem);
+  addToCart(product: any) {
+    this.cartService.addToCart(product);
   }
 
   handleRedirect(id: string) {
@@ -44,6 +44,4 @@ export class GameCardComponent implements OnInit {
       console.error('Game ID is undefined');
     }
   }
-
-
 }
