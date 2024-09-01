@@ -12,19 +12,15 @@ export class GamesRequestService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getGamesList() {
-    return this.http.get(`https://games-shop-api.glitch.me/api/v1/games`);
+    return this.http.get(`${this.apiUrl}`);
   }
+
   getGameDetails(id: string) {
-    return this.http.get(`https://games-shop-api.glitch.me/api/v1/games/${id}`);
+    return this.http.get(`${this.apiUrl}/${id}`);
   }
 
   addgame(formData: FormData): Observable<any> {
-    const token = this.authService.getToken();
-    if (!token) {
-      throw new Error('Token is null. User is not authenticated.');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.post(`${this.apiUrl}/`, formData, { headers });
+    return this.http.post(`${this.apiUrl}`, formData);
   }
 
   updategame(id: string, formData: FormData): Observable<any> {

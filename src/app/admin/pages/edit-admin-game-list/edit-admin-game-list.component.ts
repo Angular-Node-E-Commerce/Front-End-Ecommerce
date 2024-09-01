@@ -12,9 +12,13 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './edit-admin-game-list.component.css',
 })
 export class EditAdminGameListComponent {
-  game: any = {
+  game = {
     title: '',
-    image: '',
+    description: '',
+    price: '',
+    discount: '',
+    quantity: '',
+    imageCover: null as File | null,
   };
   private gameId!: string; // Use definite assignment assertion
 
@@ -33,15 +37,33 @@ export class EditAdminGameListComponent {
       });
   }
 
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.game.imageCover = file;
+    }
+  }
+
   onSubmit() {
-    this.gamesRequestService.updategame(this.gameId, this.game).subscribe(
-      (res: any) => {
-        console.log('Game updated successfully', res);
-        this.router.navigate(['/edit-admin']);
+    const formData = new FormData();
+    formData.set('title', this.game.title);
+    formData.set('description', this.game.description);
+    formData.set('price', this.game.price);
+    formData.set('discount', this.game.discount);
+    formData.set('quantity', this.game.quantity);
+    if (this.game.imageCover instanceof File) {
+      formData.set('image', this.game.imageCover);
+    }
+    console.log(formData);
+
+    this.gamesRequestService.updategame(this.gameId, formData).subscribe({
+      next: (res: any) => {
+        console.log('Category updated successfully', res);
+        this.router.navigate(['/admin-games']);
       },
-      (error) => {
-        console.error('Error updating game', error);
-      }
-    );
+      error: (error) => {
+        console.error('Error updating category', error);
+      },
+    });
   }
 }

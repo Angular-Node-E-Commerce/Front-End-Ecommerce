@@ -9,16 +9,19 @@ import { CategoriesService } from '../../../services/categories-request.service'
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-categry.component.html',
-  styleUrl: './add-categry.component.css'
+  styleUrl: './add-categry.component.css',
 })
 export class AddCategryComponent {
   category = {
     name: '',
     description: '',
-    image: null as File | null
+    image: null as File | null,
   };
 
-  constructor(private router: Router, private categoriesService: CategoriesService) { }
+  constructor(
+    private router: Router,
+    private categoriesService: CategoriesService
+  ) {}
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -33,6 +36,7 @@ export class AddCategryComponent {
     if (this.category.image) {
       formData.append('image', this.category.image);
     }
+    console.log(formData);
 
     this.categoriesService.addCategory(formData).subscribe({
       next: (res: any) => {
@@ -42,7 +46,7 @@ export class AddCategryComponent {
       },
       error: (error) => {
         console.error('Error adding category', error);
-      }
+      },
     });
   }
 }
