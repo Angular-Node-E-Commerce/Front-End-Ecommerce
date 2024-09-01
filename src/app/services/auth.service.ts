@@ -40,9 +40,9 @@ export class AuthService {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
-  removeUser(): void {
-    localStorage.removeItem('currentUser');
-  }
+  // removeUser(): void {
+  //   localStorage.removeItem('currentUser');
+  // }
 
 
   private base64UrlDecode(str: string): string {
