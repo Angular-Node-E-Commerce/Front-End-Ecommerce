@@ -1,3 +1,13 @@
 <app-landing-section />
+<ng-container *ngIf="!isLoading; else loadingSkeleton">
 <app-trending-section />
 <app-top-categories-section />
+</ng-container>
+<ng-template #loadingSkeleton>
+    <div *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8]" class="flex w-52 flex-col  gap-4">
+      <div class="skeleton h-32 w-full bg-blackback "></div>
+      <div class="skeleton h-4 w-28 bg-blackback "></div>
+      <div class="skeleton h-4 w-full bg-blackback "></div>
+      <div class="skeleton h-4 w-full bg-blackback "></div>
+    </div>
+  </ng-template>

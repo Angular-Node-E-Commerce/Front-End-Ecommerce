@@ -22,27 +22,6 @@
         </ng-container>
 
       </div>
-
-      <!-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
-        [gameItem]="game"
-        (handleSendData)="handleReceiveData($event)"></app-game-card>
-        <div *ngIf="!filterGames.length">
-          <img src="https://i.pinimg.com/564x/72/27/b7/7227b71022c00213aebc5a995efeb0a9.jpg" alt="No games found" />
-        </div>
-      </div>
-
-      <div class="flex justify-center gap-5 pagination-controls">
-        <button (click)="prevPage()"
-          class="btn rounded-3xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          <app-arrow-left />
-        </button>
-        <p class="text-neutral-50 flex items-center">{{ currentPage }}</p>
-        <button (click)="nextPage()"
-          class="btn rounded-3xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
-          <app-arrow-right />
-        </button>
-      </div> -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <ng-container *ngIf="!isLoading; else loadingSkeleton">
           <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
