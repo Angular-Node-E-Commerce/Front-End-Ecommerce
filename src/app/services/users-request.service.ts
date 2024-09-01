@@ -11,23 +11,23 @@ export class UsersRequestService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-  login(email: string, password: string): Observable<any> {
-    const body = { email, password };
-    console.log('Login request body:', body);
-
-    return this.http.post(`${this.apiUrl}/login/`, body); 
-  }
   // login(email: string, password: string): Observable<any> {
   //   const body = { email, password };
   //   console.log('Login request body:', body);
-  
-  //   return this.http.post(`${this.apiUrl}/login/`, body).pipe(
-  //     tap((response: any) => {
-  //       const user = response.user;
-  //       this.authService.setCurrentUser(user);
-  //     })
-  //   );
+
+  //   return this.http.post(`${this.apiUrl}/login/`, body); 
   // }
+  login(email: string, password: string): Observable<any> {
+    const body = { email, password };
+    console.log('Login request body:', body);
+  
+    return this.http.post(`${this.apiUrl}/login/`, body).pipe(
+      tap((response: any) => {
+        const user = response.user;
+        this.authService.setCurrentUser(user);
+      })
+    );
+  }
   
 
   signUp(user: any): Observable<any> {
