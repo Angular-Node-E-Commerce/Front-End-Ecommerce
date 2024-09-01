@@ -46,7 +46,7 @@ export class EditAdminGameListComponent {
 
   onSubmit() {
     const formData = new FormData();
-    formData.set('title', this.game.title);
+    formData.append('title', this.game.title);
     formData.set('description', this.game.description);
     formData.set('price', this.game.price);
     formData.set('discount', this.game.discount);
@@ -55,14 +55,17 @@ export class EditAdminGameListComponent {
       formData.set('image', this.game.imageCover);
     }
     console.log(formData);
+    formData.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
 
     this.gamesRequestService.updategame(this.gameId, formData).subscribe({
       next: (res: any) => {
-        console.log('Category updated successfully', res);
+        console.log('Game updated successfully', res);
         this.router.navigate(['/admin-games']);
       },
       error: (error) => {
-        console.error('Error updating category', error);
+        console.error('Error updating game', error);
       },
     });
   }

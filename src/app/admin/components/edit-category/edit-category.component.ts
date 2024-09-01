@@ -9,13 +9,13 @@ import { CategoriesService } from '../../../services/categories-request.service'
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './edit-category.component.html',
-  styleUrl: './edit-category.component.css'
+  styleUrl: './edit-category.component.css',
 })
 export class EditCategoryComponent {
   category = {
     name: '',
     description: '',
-    image: null as File | null
+    image: null as File | null,
   };
   private categoryId!: string; // Use definite assignment assertion
 
@@ -23,7 +23,7 @@ export class EditCategoryComponent {
     private route: ActivatedRoute,
     private router: Router,
     private categoriesService: CategoriesService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.categoryId = this.route.snapshot.paramMap.get('id') ?? ''; // Provide a default value
@@ -34,7 +34,7 @@ export class EditCategoryComponent {
       },
       error: (error) => {
         console.error('Error fetching category details', error);
-      }
+      },
     });
   }
 
@@ -49,10 +49,10 @@ export class EditCategoryComponent {
     const formData = new FormData();
     formData.set('name', this.category.name);
     formData.set('description', this.category.description);
-    
+
     if (this.category.image) {
       formData.set('image', this.category.image);
-    }    
+    }
 
     formData.forEach((value, key) => {
       console.log(key + ': ' + value);
@@ -66,7 +66,7 @@ export class EditCategoryComponent {
       },
       error: (error) => {
         console.error('Error updating category', error);
-      }
+      },
     });
   }
 }

@@ -29,7 +29,7 @@ export class GamesRequestService {
       throw new Error('Token is null. User is not authenticated.');
     }
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.put(`${this.apiUrl}/${id}`, formData, { headers });
+    return this.http.patch(`${this.apiUrl}/${id}`, formData, { headers });
   }
 
   deletegame(gameId: string): Observable<any> {
