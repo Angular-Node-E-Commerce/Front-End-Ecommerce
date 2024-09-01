@@ -7,7 +7,7 @@ import { OfferPipe } from './../../pipes/offer.pipe';
   selector: 'app-cart',
   standalone: true,
   imports: [CommonModule, OfferPipe],
-templateUrl: './cart.component.html',
+  templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
 export class CartComponent implements OnInit {
@@ -34,10 +34,10 @@ export class CartComponent implements OnInit {
   removeItem(item: any) {
     this.cartService.removeItem(item.id);
   }
+
   getTotalPrice(): number {
     return this.cartItems.reduce((total, item) => {
       return total + (item.price * item.quantity);
     }, 0);
   }
-
 }

@@ -19,7 +19,6 @@ export class GameDetailsComponent {
   quantity: number = 1;
   total: number = 0;
 
-  @Input() id: string = '';
 
 
   constructor(

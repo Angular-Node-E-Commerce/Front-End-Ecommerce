@@ -36,6 +36,12 @@ export class AddCategryComponent {
     if (this.category.image) {
       formData.append('image', this.category.image);
     }
+
+
+    formData.forEach((value, key) => {
+      console.log(key + ': ' + value);
+    });
+
     console.log(formData);
 
     this.categoriesService.addCategory(formData).subscribe({

@@ -28,11 +28,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: [
-        '',
-        [Validators.required, Validators.pattern(/^(?=.*[a-z]).{8,}$/)],
-      ],
-    });
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z]).{8,}$/)],],});
   }
 
   get email() {
@@ -53,7 +49,7 @@ export class LoginComponent {
 
           if (response.role === 'admin') {
             this.router.navigate(['/admin-page']);
-          } else {
+          } else if (response.role === 'user') {
             this.router.navigate(['/']);
           }
         },
