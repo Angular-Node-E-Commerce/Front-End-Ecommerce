@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,8 +15,20 @@ export class UsersRequestService {
     const body = { email, password };
     console.log('Login request body:', body);
 
-    return this.http.post(`${this.apiUrl}/login/`, body);
+    return this.http.post(`${this.apiUrl}/login/`, body); 
   }
+  // login(email: string, password: string): Observable<any> {
+  //   const body = { email, password };
+  //   console.log('Login request body:', body);
+  
+  //   return this.http.post(`${this.apiUrl}/login/`, body).pipe(
+  //     tap((response: any) => {
+  //       const user = response.user;
+  //       this.authService.setCurrentUser(user);
+  //     })
+  //   );
+  // }
+  
 
   signUp(user: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/signup/`, user);
@@ -40,6 +52,5 @@ export class UsersRequestService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete(`${this.apiUrl}/${userId}`, { headers });
   }
-
 
 }

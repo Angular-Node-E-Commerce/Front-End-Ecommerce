@@ -23,7 +23,7 @@
 
       </div>
 
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <!-- <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
         [gameItem]="game"
         (handleSendData)="handleReceiveData($event)"></app-game-card>
@@ -42,7 +42,27 @@
           class="btn rounded-3xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia border-none hover:transition-all">
           <app-arrow-right />
         </button>
+      </div> -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <ng-container *ngIf="!isLoading; else loadingSkeleton">
+          <app-game-card *ngFor="let game of filteredGamesForCurrentPage"
+            [gameItem]="game"
+            (handleSendData)="handleReceiveData($event)"></app-game-card>
+          <div *ngIf="!filterGames.length">
+            <img src="https://i.pinimg.com/564x/72/27/b7/7227b71022c00213aebc5a995efeb0a9.jpg" alt="No games found" />
+          </div>
+        </ng-container>
+      
+        <ng-template #loadingSkeleton>
+          <div *ngFor="let _ of [1, 2, 3, 4, 5, 6, 7, 8]" class="flex w-52 flex-col  gap-4">
+            <div class="skeleton h-32 w-full bg-blackback "></div>
+            <div class="skeleton h-4 w-28 bg-blackback "></div>
+            <div class="skeleton h-4 w-full bg-blackback "></div>
+            <div class="skeleton h-4 w-full bg-blackback "></div>
+          </div>
+        </ng-template>
       </div>
+      
     </div>
   </div>
 </div>

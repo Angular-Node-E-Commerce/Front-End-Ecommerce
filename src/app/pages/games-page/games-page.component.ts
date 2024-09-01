@@ -32,13 +32,16 @@ export class GamesPageComponent implements OnInit {
   GamesPerPage = 8;
   currentPage = 1;
   filteredGamesForCurrentPage: any[] = [];
+  isLoading = false;
 
 
   constructor(private gamesRequestService: GamesRequestService, private categoriesService: CategoriesService, private route: ActivatedRoute) { }
   ngOnInit(): void {
+    this.isLoading = true;
     this.gamesRequestService.getGamesList().subscribe((res: any) => {
       console.log('Data received from service:', res);
       this.handleData(res);
+      this.isLoading = false;
     });
   
     this.categoriesService.getCategories().subscribe((res: any) => {
