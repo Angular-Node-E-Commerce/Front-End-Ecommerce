@@ -1,7 +1,7 @@
 <div class="flex flex-col justify-center">
 
   <!-- Search Bar -->
-  <div class="flex justify-end">
+  <div class="flex justify-end me-5">
     <div class="form-control flex justify-center w-full sm:w-1/2 py-10">
       <input type="text" placeholder="Search"
         class="input rounded-2xl input-bordered bg-neutral-800 text-base-200 h-14 md:w-auto" />
@@ -35,7 +35,7 @@
   <!-- Add Game Button -->
   <div class="flex justify-end pt-4">
     <button
-      class="px-14 rounded-xl mt-4 btn bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none"
+      class="me-5 px-14 rounded-xl mt-4 btn bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none"
       routerLink="/add-admin-game" routerLinkActive="active-route">
       ADD GAME LIST
     </button>
@@ -43,8 +43,8 @@
 
   <!-- Games List -->
   <div class="text-neutral-50 items-center ">
-    <div>
-      <div class="user-item flex justify-between border-l-4 rounded-xl p-5 m-5"
+    <div class="w-75">
+      <div class="user-item flex justify-between bg-neutral-800   border-l-4 rounded-xl p-5 m-5"
         *ngFor="let game of games; let i = index">
         <p class="ml-5">{{ game.title }}</p>
         <div>
