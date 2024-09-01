@@ -23,8 +23,18 @@ export class EditCategoryComponent {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private categoriesService: CategoriesService
-  ) { }
+    private categoriesService: CategoriesService,
+    private fb: FormBuilder
+  ) {
+    this.registerForm = this.fb.group({
+      name: ['', Validators.required],
+      description: ['', [Validators.required, Validators.maxLength(30)]],
+      image: [null, Validators.required]
+    })
+   }
+   get name(){ return this.registerForm.get('name');}
+  get description(){ return this.registerForm.get('description')}
+  get image() { return this.registerForm.get('image'); }
 
   ngOnInit() {
     this.categoryId = this.route.snapshot.paramMap.get('id') ?? ''; // Provide a default value
