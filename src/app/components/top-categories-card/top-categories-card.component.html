@@ -2,7 +2,7 @@
   <!-- Card 1 -->
   <a routerLink="/games-page">
     <div
-      class="card shadow-lg rounded-lg overflow-hidden bg-foshia custom-border">
+      class="card shadow-lg rounded-lg overflow-hidden  bg-foshia custom-border">
       <div class="p-4 text-white text-center">
         <span class="text-lg font-semibold">{{ categoryItem.name }}</span>
       </div>
@@ -10,7 +10,7 @@
         <img
           alt="{{ categoryItem.name }}"
           [src]="categoryItem.image"
-          class="w-full h-48 object-cover border-r-8 custom-border" />
+          class="w-full h-48 object-cover border-r-8 custom-border transform transition duration-[1500ms] hover:scale-110" />
       </div>
     </div>
   </a>
