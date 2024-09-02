@@ -1,6 +1,8 @@
-<div class="card shadow-md rounded-lg overflow-hidden bg-white py-5 px-2">
-  <figure class="relative pointe h-56">
-    <img [src]="gameItem.imageCover" alt="{{gameItem.title}}" class="w-full h-f cursor-pointer" (click)="handleRedirect(gameItem._id)"/>
+<div class="card  shadow-md rounded-lg  bg-white py-5 px-2">
+  <figure class="relative point h-60 ">
+    <div class="flex justify-center">
+      <img [src]="gameItem.imageCover"  alt="{{gameItem.title}}" class="object-cover cursor-pointer transform transition duration-[1500ms] hover:scale-110" (click)="handleRedirect(gameItem._id)"/>
+    </div>
     <div class="absolute top-2 right-2 bg-foshia text-white text-xs font-bold p-1 rounded">
       ${{ gameItem.price }}
     </div>
@@ -8,18 +10,19 @@
       ${{ gameItem.discount }}
     </div>
   </figure>
-  <div class="p-4 text-neutral-50 flex justify-between">
+  <div class="p-4 flex justify-between">
     <div>
-      <span class="text-sm">{{ gameItem.genre }}</span>
-      <h3 class="font-semibold text-lg mt-1">{{ gameItem.title }}</h3>
-      <h3 class="font-semibold text-lg mt-1">{{ gameItem.description }}</h3>
+      <h3 class="font-semibold text-neutral-50  text-lg mt-1">{{ gameItem.title }}</h3>
+      <p class="font-semibold text-neutral-300 text-[12px] mt-1">{{ gameItem.description }}</p>
     </div>
-    <div class="mt-4 flex justify-end">
+    <div class="gap-5 flex justify-end flex-col">
       <button
         class="btn btn-circle bg-foshia text-neutral-50 hover:bg-neutral-50 border-none hover:text-foshia hover:transition-all"
         (click)="addToCart(gameItem)">
         <app-carticon />
       </button>
+    
+      <button class="m-auto" (click)="toggleFavorite()"><i [ngClass]="isFavorite ? 'fa-solid fa-heart text-foshia' : 'fa-solid fa-heart text-neutral-400' "></i></button>
     </div>
   </div>
 </div>

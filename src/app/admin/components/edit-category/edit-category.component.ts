@@ -31,9 +31,9 @@ export class EditCategoryComponent {
       description: ['', [Validators.required, Validators.maxLength(30)]],
       image: [null, Validators.required]
     })
-   }
-   get name(){ return this.registerForm.get('name');}
-  get description(){ return this.registerForm.get('description')}
+  }
+  get name() { return this.registerForm.get('name'); }
+  get description() { return this.registerForm.get('description') }
   get image() { return this.registerForm.get('image'); }
 
   ngOnInit() {

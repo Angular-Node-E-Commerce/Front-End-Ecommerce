@@ -3,7 +3,7 @@
   class="card shadow-md rounded-lg overflow-hidden bg-white py-5 px-2 card-height">
   <figure class="relative pointe h-56">
     <img [src]="gameItem.imageCover" alt="{{gameItem.title}}"
-      class="w-full h-40 cursor-pointer"
+      class="w-full h-40 cursor-pointer transform transition duration-[1500ms] hover:scale-110"
       (click)="handleRedirect(gameItem._id)" />
 
   </figure>
@@ -11,7 +11,7 @@
     <div>
       <span class="text-sm">{{ gameItem.genre }}</span>
       <h3 class="font-semibold text-lg mt-1">{{ gameItem.title }}</h3>
-      <h3 class="font-semibold text-lg mt-1">{{ gameItem.description }}</h3>
+      <h3 class="font-semibold text-neutral-300 text-[12px] mt-1">{{ gameItem.description }}</h3>
     </div>
     <div class="mt-4 flex justify-end">
       <button

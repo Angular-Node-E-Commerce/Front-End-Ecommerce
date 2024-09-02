@@ -1,28 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CounterService } from '../../services/counter.service';
 
 @Component({
   selector: 'app-counter',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './counter.component.html',
   styleUrl: './counter.component.css'
 })
-export class CounterComponent {
-
+export class CounterComponent implements OnInit {
   counter = 0;
-  // private counterService = inject(CounterService)
-  constructor(private counterService: CounterService) { }
+
+  constructor(private counterService: CounterService) {}
 
   ngOnInit() {
     this.counterService.getCounter().subscribe((res) => (this.counter = res));
   }
 
-  decreaseCounter(){
-    this.counterService.setCounter(this.counter - 1)
+  decreaseCounter() {
+    this.counterService.setCounter(this.counter - 1);
   }
 
-  increaseCounter(){
-    this.counterService.setCounter(this.counter + 1)
+  increaseCounter() {
+    this.counterService.setCounter(this.counter + 1);
   }
 }

@@ -22,7 +22,7 @@ export class AddCategryComponent {
   constructor(private router: Router, private categoriesService: CategoriesService, private fb: FormBuilder) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
-      description: ['', [Validators.required, Validators.minLength(30)]],
+      description: ['', [Validators.required, Validators.maxLength(30)]],
       image: [null, Validators.required]
     })
    }
@@ -30,7 +30,6 @@ export class AddCategryComponent {
   get name(){ return this.registerForm.get('name');}
   get description(){ return this.registerForm.get('description')}
   get image() { return this.registerForm.get('image'); }
-
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -45,8 +44,6 @@ export class AddCategryComponent {
     if (this.category.image) {
       formData.append('image', this.category.image);
     }
-
-    
 
     formData.forEach((value, key) => {
       console.log(key + ': ' + value);
