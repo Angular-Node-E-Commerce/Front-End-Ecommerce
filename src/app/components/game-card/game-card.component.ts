@@ -10,7 +10,7 @@ import { FavoritegameService } from '../../services/favoritegame.service';
 @Component({
   selector: 'app-game-card',
   standalone: true,
-  imports: [CarticonComponent, RouterLink, NgIf, NgClass],
+  imports: [CarticonComponent, RouterLink,  NgIf, NgClass],
   templateUrl: './game-card.component.html',
   styleUrls: ['./game-card.component.css'], // Ensure styleUrls is in plural form
 })
