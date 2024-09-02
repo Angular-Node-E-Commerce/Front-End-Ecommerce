@@ -17,19 +17,19 @@ export class AddCategryComponent {
     description: '',
     image: null as File | null,
   };
-  registerForm: FormGroup;
+  categoryrForm: FormGroup;
 
   constructor(private router: Router, private categoriesService: CategoriesService, private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
+    this.categoryrForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', [Validators.required, Validators.maxLength(30)]],
       image: [null, Validators.required]
     })
    }
   
-  get name(){ return this.registerForm.get('name');}
-  get description(){ return this.registerForm.get('description')}
-  get image() { return this.registerForm.get('image'); }
+  get name(){ return this.categoryrForm.get('name');}
+  get description(){ return this.categoryrForm.get('description')}
+  get image() { return this.categoryrForm.get('image'); }
 
   onFileChange(event: any) {
     if (event.target.files.length > 0) {
@@ -38,28 +38,31 @@ export class AddCategryComponent {
   }
 
   onSubmit() {
-    const formData = new FormData();
-    formData.append('name', this.category.name);
-    formData.append('description', this.category.description);
-    if (this.category.image) {
-      formData.append('image', this.category.image);
-    }
+    if(this.categoryrForm.valid){
 
-    formData.forEach((value, key) => {
-      console.log(key + ': ' + value);
-    });
-
-    console.log(formData);
-
-    this.categoriesService.addCategory(formData).subscribe({
-      next: (res: any) => {
-        console.log('Category added successfully', res);
-        this.category = { name: '', description: '', image: null };
-        this.router.navigate(['/admin-categories']);
-      },
-      error: (error) => {
-        console.error('Error adding category', error);
+      const formData = new FormData();
+      formData.append('name', this.category.name);
+      formData.append('description', this.category.description);
+      if (this.category.image) {
+        formData.append('image', this.category.image);
       }
-    });
+  
+      formData.forEach((value, key) => {
+        console.log(key + ': ' + value);
+      });
+  
+      console.log(formData);
+  
+      this.categoriesService.addCategory(formData).subscribe({
+        next: (res: any) => {
+          console.log('Category added successfully', res);
+          this.category = { name: '', description: '', image: null };
+          this.router.navigate(['/admin-categories']);
+        },
+        error: (error) => {
+          console.error('Error adding category', error);
+        }
+      });
+    }
   }
 }

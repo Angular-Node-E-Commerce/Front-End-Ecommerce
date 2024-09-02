@@ -6,11 +6,21 @@
         class="px-5 py-2 btn rounded-xl bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">View
         All</a>
     </div>
-    <div *ngIf="games.length > 0; else noGames"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-      <app-trending-card *ngFor="let game of games | slice:0:4; trackBy: trackByIndex"
-        [gameItem]="game" />
+
+    <div *ngIf="games.length > 0; else noGames" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <ng-container *ngIf="!isLoading; else loadingSkeleton">
+        <app-trending-card *ngFor="let game of games | slice:0:4; trackBy: trackByIndex" [gameItem]="game" />
+      </ng-container >
     </div>
+
+    <ng-template #loadingSkeleton>
+      <div *ngFor="let _ of [1, 2, 3, 4]" class="flex w-52 flex-col  gap-4">
+        <div class="skeleton h-32 w-full bg-blackback "></div>
+        <div class="skeleton h-4 w-28 bg-blackback "></div>
+        <div class="skeleton h-4 w-full bg-blackback "></div>
+        <div class="skeleton h-4 w-full bg-blackback "></div>
+      </div>
+    </ng-template>
 
     <ng-template #noGames>
       <div class="no-users-message w-96 flex justify-center items-center">

@@ -14,7 +14,5 @@ import { NgFor, NgIf } from '@angular/common';
 export class HomeComponent {
   isLoading = false;
 ngOnInit(){
-  this.isLoading = true;
-
-}
-}
+  this.isLoading = true;  
+}}
