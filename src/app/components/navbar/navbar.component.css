@@ -2,3 +2,8 @@
   background-color: rgb(231 94 141 / var(--tw-bg-opacity));
   color: white;
 }
+
+
+.bg-black{
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity));
+}
