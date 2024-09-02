@@ -1,15 +1,12 @@
 <div class="w-full landing p-0 sm:p-8 ">
   <div class="p-9">
     <div class=" bg-neutral-800  sm:p-10 rounded-xl mx-auto  landing-inside ">
-      <div
-        class=" inside  sm:p-10 rounded-xl mx-auto   mt-48 md:mt-0  landing-inside">
-        <div
-          class="landing-back h-96  rounded-lg flex items-center justify-between">
+      <div class=" inside  sm:p-10 rounded-xl mx-auto   mt-48 md:mt-0  landing-inside">
+        <div class="landing-back h-96  rounded-lg flex items-center justify-between">
 
           <div class="flex flex-col md:flex-row text-neutral-50 justify-center">
             <div class="w-full md:w-1/2 flex justify-center">
-              <img class="rounded-xl w-3/5 md:w-3/5 lg:w-1/2" src="yasser.jpg"
-                alt="yasser salem">
+              <img class="rounded-xl w-3/5 md:w-3/5 lg:w-1/2" src={{userDetails.image}} alt="yasser salem">
             </div>
 
             <div class="  md:w-1/2 flex justify-center  md:justify-start  bg-gray-500">
@@ -23,8 +20,7 @@
                     <hr>
                     <div class="flex justify-between">
                       <span class>Email</span>
-                      <span
-                        class="text-foshia font-bold text-sm">{{userDetails?.email}}</span>
+                      <span class="text-foshia font-bold text-sm">{{userDetails?.email}}</span>
                     </div>
                     <hr>
                     <div class="flex justify-between">
@@ -36,45 +32,34 @@
               </div>
             </div>
           </div>
-
         </div>
         <hr>
-
 
         <div class="bg-gray-900 p-8 flex flex-col mt-36 md:mt-24">
           <div class="flex  justify-center md:justify-start">
             <h2 class="text-2xl p-5 font-bold text-foshia"> My Favorite Games </h2>
           </div>
+
           <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-4 gap-6">
-            <app-most-popular></app-most-popular>
-            <app-most-popular></app-most-popular>
-            <app-most-popular></app-most-popular>
-            <app-most-popular></app-most-popular>
+            <div *ngFor="let game of favoriteGames">
+              <div class=" bg-neutral-800 rounded-xl">
+                <div class="bg-gray-800 rounded-lg p-4">
+                  <img src={{game?.imageCover}} alt="First Clip" class="rounded-lg mb-4 w-full">
+                  <div class="flex justify-between">
+                    <div>
+                      <h3 class="text-xl text-neutral-50">{{game.title}}</h3>
+                    </div>
+                    <div class=" text-neutral-50 flex items-center">
+                      <i class="fa-regular fa-eye text-foshia p-2"></i>
+                      <span>{{game.price}}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-<!--
-        <div class="flex justify-center align-middle">
-          <button
-            class="btn bg-foshia btn-outline  w-80 text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none rounded-full">
-            Load More Clips
-          </button>
-        </div> -->
       </div>
-
     </div>
   </div>
 </div>
-
-<!--
-      <div class="inside   sm:p-10  mx-auto m-9 landing-inside">
-        <h2
-          class="text-4xl underline decoration-2 font-bold text-neutral-50 mb-6">Your
-          Gaming <span
-            class="text-foshia ">Library</span>
-        </h2>
-        <app-gaming-library></app-gaming-library>
-        <app-gaming-library></app-gaming-library>
-        <app-gaming-library></app-gaming-library>
-        <app-gaming-library></app-gaming-library>
-        <hr>
-      </div> -->
