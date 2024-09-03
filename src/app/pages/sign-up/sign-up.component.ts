@@ -24,7 +24,8 @@ export class SignUpComponent {
       city: ['', Validators.required],
       street: ['', Validators.required],
       image: [null], // Ensure image is required
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])/)]],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z]).{8,}$/)]],
+  
     });
   }
 
