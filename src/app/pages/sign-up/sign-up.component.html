@@ -1,7 +1,7 @@
 <div class="py-10  bg-blackback flex justify-center">
   <div class="flex flex-wrap justify-between bg-neutral-800 w-10/12 mt-4 rounded-3xl">
     <div class="flex justify-center w-full md:w-1/2 p-5 items-center">
-      <img src="https://www.bhmpics.com/downloads/controller-player-Wallpapers/3.17f57382aa0069105b7449355b7b2083.jpg"
+      <img src="login.jpg"
         alt class="w-3/4 product-image  rounded-l-3xl h-4/6">
     </div>
 
@@ -50,7 +50,7 @@
           <div class="text-foshia mt-1">
             @if(username?.hasError('required')) {
             <small class="text-red-500">Required!</small>
-            } 
+            }
             @if(username?.hasError('pattern')) {
             <small class="text-red-500">Remove Spaces</small>
             }
@@ -58,7 +58,7 @@
           }
         </div>
 
-        
+
 
         <!-- Email address Input -->
         <div class="mb-3">
@@ -143,7 +143,7 @@
           <input type="file" (change)="onFileChange($event)"
             class="block w-full text-lg text-gray-900  border-none rounded-lg cursor-pointer bg-transparent dark:text-gray-400  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-foshia"
             id="image" name="image" required>
-        </div> 
+        </div>
 
         <div class="flex justify-center mb-1">
           <button type="submit"
