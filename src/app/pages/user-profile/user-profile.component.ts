@@ -21,5 +21,5 @@ export class UserProfileComponent {
     this.userDetails = this.authService.getCurrentUser();
     this.favoriteGames = this.favoriteGameService.getFavorites();
   }};
-
+  
 

@@ -2,54 +2,97 @@
   <div class="bg-neutral-800 p-8 mt-28 rounded-lg text-base-100 shadow-lg w-full sm:w-8/12">
     <h1 class="text-2xl font-bold mb-6 text-center">Edit Games</h1>
 
-    <form (ngSubmit)="onSubmit()">
-
+    <form (ngSubmit)="onSubmit()" [formGroup]="gameForm">
       <div class="flex flex-row justify-center sm:flex-row gap-3">
-
         <div class="form-group w-full sm:w-3/4">
-
           <label for="title" class="block text-sm font-medium mb-2">Title:</label>
-          <input type="text"
+          <input type="text" formControlName="title"
             class="form-control w-full px-4 py-2 mb-4 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            placeholder="Enter game title" [(ngModel)]="game.title" name="title" id="title" required>
+            placeholder="Enter game title" name="title" id="title" required>
+            @if(title?.touched && title?.invalid) {
+              <small class="text-foshia">Required!</small>
+              }
 
-          <label for="category" class="block text-sm font-medium mb-2">Category:</label>
-          <select id="category" name="category"
+          <label for="description" class="block text-sm font-medium mb-2">Description:</label>
+          <input type="description"
+            class="form-control w-full px-4 py-2 mb-4 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+            placeholder="Enter game description" formControlName="description" id="description" name="description"
+            required />
+            @if(description?.touched && description?.invalid){
+              <div class="form-text text-foshia">
+                @if(description?.hasError('required')){
+                  <small class="text-foshia">Required!</small>
+                } @if(description?.hasError('maxlength')){
+                  <small class="text-foshia">length 30 only!</small>
+                }
+              </div>}
+
+          <!-- <label for="category" class="block text-sm font-medium mb-2">Category:</label>
+          <select id="category" name="category" formControlName="category"
             class="form-control w-full px-4 mb-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            [(ngModel)]="game.category" required>
+          required>
             <option value="" disabled selected>Select a category</option>
             <option *ngFor="let category of categories" [value]="category._id">
               {{ category.name }}
             </option>
           </select>
-
-          <label for="description" class="block text-sm font-medium mb-2">Description:</label>
-          <input type="description"
-            class="form-control w-full px-4 py-2 mb-4 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            placeholder="Enter game description" [(ngModel)]="game.description" name="description" id="description"
-            required />
+          @if(category?.touched && category?.invalid){
+            <div class="form-text text-foshia">
+              @if(category?.hasError('required')){
+                <small class="text-foshia">Required!</small>
+              } </div>}       -->
 
           <label for="price" class="block text-sm font-medium mb-2">Price:</label>
-          <input type="text"
+          <input type="text" formControlName="price"
             class="form-control w-full px-4 mb-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            placeholder="Enter game Price" [(ngModel)]="game.price" id="price" name="price" required>
+            placeholder="Enter game price" id="price" name="price" required>
+            @if(price?.touched && price?.invalid){
+              <div class="form-text text-foshia">
+                @if(price?.hasError('required')){
+                  <small class="text-foshia">Required!</small>
+                } @else if(price?.hasError('pattern')){
+                  <small class="text-foshia">Just number!!</small>
+                }
+              </div>}
 
-          <label for="discount" class="block text-sm font-medium mb-2">discount:</label>
-          <input type="text"
+          <label for="discount" class="block text-sm font-medium mb-2">Discount:</label>
+          <input type="text" formControlName="discount"
             class="form-control w-full px-4 py-2 mb-4 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            placeholder="Enter game discount" [(ngModel)]="game.discount" name="discount" id="discount" required>
+            placeholder="Enter game discount"  id="discount" name="discount" required>
+            @if(discount?.touched && discount?.invalid){
+              <div class="form-text text-foshia">
+                @if(discount?.hasError('required')){
+                  <small class="text-foshia">Required!</small>
+                } @else if(discount?.hasError('pattern')){
+                  <small class="text-foshia">Just number!!</small>
+                }
+              </div>}
 
-          <label for="quantity" class="block text-sm font-medium mb-2">quantity:</label>
-          <input type="text"
+          <label for="quantity" class="block text-sm font-medium mb-2">Quantity:</label>
+          <input type="text" formControlName="quantity"
             class="form-control w-full px-4 py-2 mb-4 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
-            placeholder="Enter game Description" [(ngModel)]="game.quantity" name="quantity" id="quantity" required>
-
+            placeholder="Enter game quantity" id="quantity" name="quantity" required>
+            @if(quantity?.touched && quantity?.invalid){
+              <div class="form-text text-foshia">
+                @if(quantity?.hasError('required')){
+                  <small class="text-foshia">Required!</small>
+                } @else if(quantity?.hasError('pattern')){
+                  <small class="text-foshia">Just number!!</small>
+                }
+              </div>}
 
           <div class="form-group w-full sm:w-1/4">
             <label for="image" class="block text-sm font-medium mb-2">Image URL</label>
-            <input type="file"
-              class="form-control w-full px-4 py-2 rounded-lg bg-neutral-700 text-base-100 border border-neutral-600 focus:outline-none focus:ring-2 focus:ring-foshia"
+            <input type="file" formControlName="image"
+              class="block w-full text-lg text-gray-900  border-none rounded-lg cursor-pointer bg-transparent dark:text-gray-400  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-foshia"
               placeholder="Enter image URL" name="image" id="image" (change)="onFileChange($event)">
+              @if(image?.touched && image?.invalid){
+                <div class="form-text text-foshia">
+                  @if(image?.hasError('required')){
+                    <small class="text-foshia">Required!</small>
+                  }
+                </div>}
+
           </div>
         </div>
 
@@ -61,6 +104,12 @@
           Edit Game
         </button>
       </div>
-
-
+      <div class="text-center">
+        <button type="submit"
+          class="btn border-none px-6 text-base-100 py-2 rounded-lg bg-foshia hover:bg-foshia transition duration-300">
+          Add Game
+        </button>
+      </div>
     </form>
+  </div>
+</div>

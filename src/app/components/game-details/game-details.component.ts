@@ -18,9 +18,7 @@ export class GameDetailsComponent {
   gameDetails: any;
   quantity: number = 1;
   total: number = 0;
-
-
-
+  
   constructor(
     private route: ActivatedRoute,
     private gamesRequestService: GamesRequestService,

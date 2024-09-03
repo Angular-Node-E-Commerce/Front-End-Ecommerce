@@ -21,15 +21,17 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './trending-section.component.css',
 })
 export class TrendingSectionComponent {
-  games: any[] = [];
-
+  games: any[] = []
+  isLoading: Boolean = false;
   constructor(private gamesRequestService: GamesRequestService) {}
 
   ngOnInit(): void {
+    this.isLoading = true;
     this.gamesRequestService.getGamesList().subscribe((res: any) => {
       console.log('Data received from service:', res);
       this.handleData(res);
     });
+    this.isLoading = false;
   }
   trackByIndex(index: number, game: any): number {
     return game.id; // or any unique identifier

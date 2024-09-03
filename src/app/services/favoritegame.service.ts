@@ -4,15 +4,8 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class FavoritegameService {
-
-  constructor() { }
   private favoriteGames: any[] = [];
 
-  getFavorites() {
-    return this.favoriteGames;
-  }
-
-  
   toggleFavorite(game: any) {
     const gameIndex = this.favoriteGames.findIndex(favGame => favGame._id === game._id);
 
@@ -27,5 +20,9 @@ export class FavoritegameService {
 
   isFavorite(game: any): boolean {
     return this.favoriteGames.some(favGame => favGame._id === game._id);
+  }
+
+  getFavorites(): any[] {
+    return this.favoriteGames;
   }
 }
