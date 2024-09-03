@@ -25,7 +25,6 @@ export class SignUpComponent {
       street: ['', Validators.required],
       image: [null], // Ensure image is required
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z]).{8,}$/)],],});
-    });
   }
 
   get firstname() { return this.registerForm.get('firstname'); }
@@ -65,7 +64,7 @@ export class SignUpComponent {
       formData.append('country', this.registerForm.value.country);
       formData.append('city', this.registerForm.value.city);
       formData.append('street', this.registerForm.value.street);
-  
+
 
       console.log('Form Data:', formData);
 
