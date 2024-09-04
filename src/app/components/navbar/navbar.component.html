@@ -45,8 +45,13 @@
     <div class="dropdown dropdown-end">
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img alt="Tailwind CSS Navbar component"
-            src={{userDetails.image}} />
+          @if(!userDetails){
+            <img alt="No User"
+            src='no-profile-picture-icon.webp'  alt=" Profile pic"/>
+          }@else{
+            <img alt="Tailwind CSS Navbar component"
+              src={{userDetails.image}}   alt=" Profile pic"/>
+          }
         </div>
       </div>
       <ul tabindex="0"
@@ -63,7 +68,7 @@
         <li class="p-1"> <a class="nav-link" routerLink="/login"
             routerLinkActive="active-route">Login</a> </li>
         <li
-          class="hover:bg-error hover:rounded-lg  hover:text-neutral-50 hover:transition-all"><a>Logout</a></li>
+          class="hover:bg-error hover:rounded-lg hover:text-neutral-50 hover:transition-all"><a (click)="logOut()">Logout</a></li>
       </ul>
     </div>
   </div>
