@@ -13,7 +13,8 @@ export class FavoritegameService {
       this.favoriteGames.push(game);
       console.log('Game added to favorites:', game);
     } else {
-      this.favoriteGames.splice(gameIndex, 1);
+      // this.favoriteGames.splice(gameIndex, 1);
+      this.favoriteGames.filter(favGame => favGame._id !== game._id);
       console.log('Game removed from favorites:', game);
     }
   }
