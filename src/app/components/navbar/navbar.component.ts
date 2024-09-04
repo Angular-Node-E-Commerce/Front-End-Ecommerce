@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { CartService } from '../../services/cart.service';
 import { AuthService } from './../../services/auth.service';
 
@@ -15,7 +15,7 @@ export class NavbarComponent {
   totalItems = 0;
   totalPrice = 0;
   userDetails: any;
-  constructor(private cartService: CartService, private authService: AuthService) {}
+  constructor(private cartService: CartService, private authService: AuthService, private router: Router, ) {}
 
   ngOnInit() {
     this.userDetails = this.authService.getCurrentUser();
@@ -29,10 +29,17 @@ export class NavbarComponent {
 
   }
 
-
   getTotalPrice(): number {
     return this.cartItems.reduce((total, item) => {
       return total + (item.price * item.quantity);
     }, 0);
+  }
+
+  logOut(){
+    this.authService.removeUser();
+    this.authService.removeToken();
+    this.authService.removeRole();
+    this.router.navigate(['/login'],{ replaceUrl: true });
+    console.log('UserRemoved From LocalStorage')
   }
 }
