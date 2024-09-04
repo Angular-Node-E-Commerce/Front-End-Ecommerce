@@ -42,31 +42,42 @@
   </div>
 
   <!-- Games List -->
-  <div class="text-neutral-50 items-center ">
-    <div class="w-75">
-      <div class="user-item flex justify-between bg-neutral-800   border-l-4 rounded-xl p-5 m-5"
-        *ngFor="let game of games; let i = index">
-        <p class="ml-5">{{ game.title }}</p>
-        <div>
-          <img [src]="game.imageCover" class="w-1/4" alt="">
-        </div>
-        <div class="mr-5">
-          <!-- <button
-            class="btn px-6 mr-3 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none"
-            [routerLink]="['/edit-add-admin', game._id]" routerLinkActive="active-route">
-            Edit
-          </button> -->
-
-          <button (click)="editGame(game._id)"
-            class="btn px-6 mr-3 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">Edit</button>
-
-          <button (click)="deleteGame(game._id)"
-            class="btn px-6 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">
-            Delete
-          </button>
-        </div>
-      </div>
-    </div>
+  <div class="overflow-x-auto text-neutral-50">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Title
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Image
+          </th>
+          <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <tr *ngFor="let game of games; let i = index">
+          <td class="px-6 py-4 whitespace-nowrap">
+            {{ game.title }}
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <img [src]="game.imageCover" class="w-12 h-12 rounded" alt="Game Image">
+          </td>
+          <td class="px-6 py-4 whitespace-nowrap">
+            <button (click)="editGame(game._id)"
+              class="btn px-6 mr-3 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">
+              Edit
+            </button>
+            <button (click)="deleteGame(game._id)"
+              class="btn px-6 bg-foshia text-neutral-50 hover:bg-neutral-50 hover:text-foshia hover:transition-all border-none">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
 </div>

@@ -24,7 +24,13 @@ export class NavbarComponent {
       this.totalItems = items.reduce((total, item) => total + item.quantity, 0);
       this.totalPrice = this.getTotalPrice();
       this.userDetails = this.authService.getCurrentUser();
-      console.log('User details:', this.userDetails);
+      if (this.userDetails) {
+        console.log('User details:', this.userDetails);
+        console.log('User details:', this.userDetails.role);
+        console.log(this)
+      } else {
+        console.log('User details not available');
+      }
     });
 
   }
@@ -34,6 +40,7 @@ export class NavbarComponent {
       return total + (item.price * item.quantity);
     }, 0);
   }
+
 
   logOut(){
     this.authService.removeUser();

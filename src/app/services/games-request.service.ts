@@ -28,7 +28,7 @@ export class GamesRequestService {
     if (!token) {
       throw new Error('Token is null. User is not authenticated.');
     }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', token);
     return this.http.patch(`${this.apiUrl}/${id}`, formData, { headers });
   }
 
@@ -37,7 +37,7 @@ export class GamesRequestService {
     if (!token) {
       throw new Error('Token is null. User is not authenticated.');
     }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const headers = new HttpHeaders().set('Authorization', token);
     return this.http.delete(`${this.apiUrl}/${gameId}`, { headers });
   }
 }

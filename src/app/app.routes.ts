@@ -72,11 +72,14 @@ export const routes: Routes = [
     path: 'cart',
     component: CartComponent,
     title: 'Cart',
+    canActivate: [AuthGuard],
+
   },
   {
     path: 'user-profile',
     component: UserProfileComponent,
     title: 'Profile Page',
+    canActivate: [AuthGuard],
   },
   {
     path: 'add-category',
@@ -86,7 +89,6 @@ export const routes: Routes = [
   {
     path: 'admin-page',
     component: AdminPageComponent,
-    // title:'Admin Page', canActivate: [AuthGuard]
     title: 'Admin Page',
     canActivate: [AuthGuard, AdminGuard],
   },

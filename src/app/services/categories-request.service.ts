@@ -12,12 +12,14 @@ export class CategoriesService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getCategories(): Observable<any> {
-    const token = this.authService.getToken();
-    if (!token) {
-      throw new Error('Token is null. User is not authenticated.');
-    }
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get(this.apiUrl, { headers });
+    // const token = this.authService.getToken();
+    // if (!token) {
+    //   throw new Error('Token is null. User is not authenticated.');
+    // }
+    // const headers = new HttpHeaders().set('Authorization', token);
+    // return this.http.get(this.apiUrl, { headers });
+    return this.http.get(this.apiUrl);
+
   }
 
   getCategoryDetails(id: string): Observable<any> {
@@ -31,12 +33,13 @@ export class CategoriesService {
   updateCategory(id: string, formData: FormData): Observable<any> {
     return this.http.patch(`${this.apiUrl}/${id}/`, formData);
   }
+
+  deleteCategory(categoryId: string): Observable<any> {
+    const token = this.authService.getToken();
+    if (!token) {
+      throw new Error('Token is null. User is not authenticated.');
+    }
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.delete(`${this.apiUrl}/${categoryId}`, { headers });
+  }
 }
-// deleteCategory(categoryId: string): Observable<any> {
-//   const token = this.authService.getToken();
-//   if (!token) {
-//     throw new Error('Token is null. User is not authenticated.');
-//   }
-//   const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-//   return this.http.delete(`${this.apiUrl}/${categoryId}`, { headers });
-// }

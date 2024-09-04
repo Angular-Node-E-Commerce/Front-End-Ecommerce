@@ -1,8 +1,10 @@
 <div class="navbar text-foshia bg-neutral-800 z-50">
   <div class="flex-1">
-    <a class="btn btn-ghost text-xl" class="nav-link bg-blackback" routerLink="/"
+    <a class="btn btn-ghost text-xl" class="nav-link bg-blackback"
+      routerLink="/"
       routerLinkActive="active-route bg-black">
-      <img class="rounded-lg " width="100" height="90"  src="logo.jpg" alt=""logo></a>
+      <img class="rounded-lg " width="100" height="90" src="logo.jpg" alt
+        logo></a>
   </div>
   <div class="flex-none">
     <div class="flex-none text-foshia">
@@ -11,8 +13,6 @@
       <ul class="menu menu-horizontal px-1">
         <li> <a class="nav-link" routerLink="/games-page"
             routerLinkActive="active-route">Games</a> </li>
-        <li> <a class="nav-link" routerLink="/admin-page"
-            routerLinkActive="active-route">Admin</a> </li>
       </ul>
     </div>
     <div class="dropdown dropdown-end">
@@ -46,11 +46,11 @@
       <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
           @if(!userDetails){
-            <img alt="No User"
-            src='no-profile-picture-icon.webp'  alt=" Profile pic"/>
+          <img alt="No User"
+            src='no-profile-picture-icon.webp' alt=" Profile pic" />
           }@else{
-            <img alt="Tailwind CSS Navbar component"
-              src={{userDetails.image}}   alt=" Profile pic"/>
+          <img alt="Tailwind CSS Navbar component"
+            src={{userDetails.image}} alt=" Profile pic" />
           }
         </div>
       </div>
@@ -63,12 +63,15 @@
             <span class="badge">New</span>
           </a>
         </li>
+        <li> <a class="nav-link" routerLink="/admin-page"
+            routerLinkActive="active-route">Admin</a> </li>
         <li class="p-1"> <a class="nav-link" routerLink="/sign-up"
             routerLinkActive="active-route">Sign Up</a> </li>
         <li class="p-1"> <a class="nav-link" routerLink="/login"
             routerLinkActive="active-route">Login</a> </li>
         <li
-          class="hover:bg-error hover:rounded-lg hover:text-neutral-50 hover:transition-all"><a (click)="logOut()">Logout</a></li>
+          class="hover:bg-error hover:rounded-lg hover:text-neutral-50 hover:transition-all"><a
+            (click)="logOut()">Logout</a></li>
       </ul>
     </div>
   </div>
